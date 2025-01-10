@@ -4,6 +4,41 @@ A robust cryptocurrency tracking API that provides real-time price statistics an
 
 [![Deployment Status](https://img.shields.io/badge/deployment-live-success)](https://crypto-metrics-teal.vercel.app)
 
+```mermaid
+flowchart TD
+    subgraph External
+        CG[CoinGecko API]
+    end
+
+    subgraph Backend
+        BJ[Background Job
+         Every 2 hours]
+        API[Express API Server]
+        DB[(MongoDB)]
+        
+        subgraph Endpoints
+            Stats["/api/stats
+Latest Crypto Data"]
+            Dev["/api/deviation
+Price Standard Deviation"]
+        end
+    end
+
+    CG -->|Fetch Price Data\nBTC, ETH, MATIC| BJ
+    BJ -->|Store Price Records| DB
+    API --> Stats & Dev
+    Stats -->|Query Latest Data| DB
+    Dev -->|Query Last 100 Records| DB
+
+    classDef external fill:#ff9800,stroke:#000,stroke-width:2px,color:#000
+    classDef api fill:#2196f3,stroke:#000,stroke-width:2px,color:#fff
+    classDef db fill:#4caf50,stroke:#000,stroke-width:2px,color:#fff
+    
+    class CG external
+    class API,Stats,Dev api
+    class DB db
+
+```
 ## Table of Contents
 - [Features](#features)
 - [Tech Stack](#tech-stack)
