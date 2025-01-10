@@ -109,6 +109,7 @@ You can also test these endpoints using tools like Postman or any web browser.
 ```bash
 git clone https://github.com/vishdadhich092004/CryptoMetrics
 cd crypto-metrics
+cd server
 ```
 
 2. Install dependencies:
