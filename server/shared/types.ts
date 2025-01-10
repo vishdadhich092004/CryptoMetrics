@@ -1,6 +1,6 @@
 export enum CryptoCoin {
   BITCOIN = "bitcoin",
-  MATIC = "matic",
+  MATIC = "matic-network",
   ETHEREUM = "ethereum",
 }
 export type CryptoPriceType = {

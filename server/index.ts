@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoConnect from "./db/db.connect";
+import { startPriceUpdateJob } from "./services/updatePrices";
 const app = express();
 
 app.use(express.json());
@@ -14,6 +15,9 @@ app.get("/", (req, res) => {
 
 const connectMongo = async () => {
   await mongoConnect(process.env.MONGO_URI as string);
+
+  // start the first priceUpdateFunc
+  await startPriceUpdateJob();
 };
 connectMongo();
 
