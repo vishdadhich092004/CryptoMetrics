@@ -7,9 +7,14 @@ const coinGeckoUrl = process.env.COIN_GECKO_URL as string;
 
 export const fetchCryptoData = async (): Promise<CryptoPriceType[] | any> => {
   try {
-    const coinsString = COINS;
+    const coinsString = COINS.join(",");
 
-    const url = `${coinGeckoUrl}/simple/price?ids=${coinsString}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true`;
+    const url = new URL(`${coinGeckoUrl}/simple/price`);
+    // adding the required search Params
+    url.searchParams.append("ids", coinsString);
+    url.searchParams.append("vs_currencies", "usd");
+    url.searchParams.append("include_market_cap", "true");
+    url.searchParams.append("include_24hr_change", "true");
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -36,8 +41,7 @@ export const fetchCryptoData = async (): Promise<CryptoPriceType[] | any> => {
     await Promise.all(savePromises);
 
     console.log(
-      `[${new Date().toISOString()}] Successfully updated the prices for all coins`,
-      data
+      `[${new Date().toISOString()}] Successfully updated the prices for all coins`
     );
   } catch (e) {
     console.error(e);
@@ -45,12 +49,11 @@ export const fetchCryptoData = async (): Promise<CryptoPriceType[] | any> => {
 };
 
 export const startPriceUpdateJob = async () => {
+  // for the first implementation
+  await fetchCryptoData();
   // calls the fetchCrypto after every 2 hours
   cron.schedule(" 0 */2 * * *", async () => {
     console.log(`[${new Date().toISOString()}] : Starting Price Update Job`);
     await fetchCryptoData();
   });
-
-  // for the first implementation
-  await fetchCryptoData();
 };

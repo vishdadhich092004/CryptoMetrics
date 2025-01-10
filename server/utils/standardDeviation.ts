@@ -1,7 +1,3 @@
-type calculateStandardDeviationProps = {
-  prices: number[];
-};
-
 export const calculateStandardDeviation = (prices: number[]): number => {
   // total length of prices being passed
   const len_prices = prices.length;
