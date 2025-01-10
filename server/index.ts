@@ -3,6 +3,7 @@ import cors from "cors";
 import "dotenv/config";
 import mongoConnect from "./db/db.connect";
 import { startPriceUpdateJob } from "./services/updatePrices";
+import routes from "./routes/routes";
 const app = express();
 
 app.use(express.json());
@@ -20,6 +21,9 @@ const connectMongo = async () => {
   await startPriceUpdateJob();
 };
 connectMongo();
+
+// all routes
+app.use("/api", routes);
 
 const port = process.env.PORT || 6060;
 app.listen(port, () => {

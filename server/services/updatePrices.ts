@@ -1,8 +1,8 @@
 import CryptoPrice from "../models/cryptoPrice";
 import cron from "node-cron";
 import { CryptoPriceType } from "../shared/types";
-const COINS = ["bitcoin", "matic-network", "ethereum"];
 
+const COINS = ["bitcoin", "matic-network", "ethereum"];
 const coinGeckoUrl = process.env.COIN_GECKO_URL as string;
 
 export const fetchCryptoData = async (): Promise<CryptoPriceType[] | any> => {
