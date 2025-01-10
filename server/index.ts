@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import mongoConnect from "./db/db.connect";
-import { startPriceUpdateJob } from "./services/updatePrices";
+// import { startPriceUpdateJob } from "./services/updatePrices";
 import routes from "./routes/routes";
 const app = express();
 
@@ -18,7 +18,7 @@ const connectMongo = async () => {
   await mongoConnect(process.env.MONGO_URI as string);
 
   // start the first priceUpdateFunc
-  await startPriceUpdateJob();
+  //   await startPriceUpdateJob();
 };
 connectMongo();
 

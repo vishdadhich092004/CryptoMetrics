@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import CryptoPrice from "../models/cryptoPrice";
 import { CryptoPriceType } from "../shared/types";
+import { validateCoin } from "../helpers/validateCoin";
 
 // query type
 type StatsQuery = {
   coin?: string;
 };
-const validCoins = ["bitcoin", "matic-network", "ethereum"];
 
 export const getStats = async (
   req: Request,
@@ -14,17 +14,13 @@ export const getStats = async (
 ): Promise<CryptoPriceType | any> => {
   try {
     const { coin }: StatsQuery = req.query;
-    if (!coin) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Coin Parameter is required" });
-    }
-    // validate coin token
-    if (!validCoins.includes(coin)) {
+    const validation = validateCoin(coin);
+
+    // validate the coin type
+    if (!validation.isValid) {
       return res.status(400).json({
         success: false,
-        message:
-          "Invalid Coin. Coin should be : bitcoin, matic-network, ethereum",
+        error: validation.error,
       });
     }
 

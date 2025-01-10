@@ -45,6 +45,7 @@ export const fetchCryptoData = async (): Promise<CryptoPriceType[] | any> => {
 };
 
 export const startPriceUpdateJob = async () => {
+  // calls the fetchCrypto after every 2 hours
   cron.schedule(" 0 */2 * * *", async () => {
     console.log(`[${new Date().toISOString()}] : Starting Price Update Job`);
     await fetchCryptoData();
