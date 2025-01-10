@@ -8,6 +8,7 @@ A robust cryptocurrency tracking API that provides real-time price statistics an
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [API Endpoints](#api-endpoints)
+- [Try It Now](#try-it-now)
 - [Installation](#installation)
 - [Environment Variables](#environment-variables)
 - [Running the Application](#running-the-application)
@@ -64,6 +65,43 @@ Response:
   "deviation": number
 }
 ```
+
+## Try It Now
+
+Test the API endpoints directly using these curl commands:
+
+### Get Bitcoin Stats
+```bash
+curl "https://crypto-metrics-teal.vercel.app/api/stats?coin=bitcoin"
+```
+
+### Get Ethereum Stats
+```bash
+curl "https://crypto-metrics-teal.vercel.app/api/stats?coin=ethereum"
+```
+
+### Get MATIC Stats
+```bash
+curl "https://crypto-metrics-teal.vercel.app/api/stats?coin=matic-network"
+```
+
+### Get Bitcoin Price Deviation
+```bash
+curl "https://crypto-metrics-teal.vercel.app/api/deviation?coin=bitcoin"
+```
+
+### Get Ethereum Price Deviation
+```bash
+curl "https://crypto-metrics-teal.vercel.app/api/deviation?coin=ethereum"
+```
+
+### Get MATIC Price Deviation
+```bash
+curl "https://crypto-metrics-teal.vercel.app/api/deviation?coin=matic-network"
+```
+
+You can also test these endpoints using tools like Postman or any web browser.
+
 
 ## Installation
 
